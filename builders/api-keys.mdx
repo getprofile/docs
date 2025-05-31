@@ -1,0 +1,83 @@
+---
+title: "API Keys"
+description: "Manage secret keys for the GetProfile API"
+icon: "key-round"
+---
+
+Your API key is the **gateway** to your app's profiling data and must be handled with care.
+
+---
+
+## What is an API Key?
+
+Each app in GetProfile has a unique **API key** that:
+
+- Authenticates your requests
+- Enforces your usage quotas and plan limits
+- Segregates your data from other apps
+
+---
+
+## Best Practices
+
+- **Keep it secret!** Never share your API key publicly or commit it to version control.
+- **Use environment variables** to store your API key securely in your applications.
+- **Rotate keys** periodically for added security — you can do this from your dashboard.
+
+Example for a secure environment variable in a `.env` file:
+
+```plaintext
+GETPROFILE_API_KEY=your_api_key_here
+```
+
+Then, access it in your code:
+
+In Python:
+
+```python
+import os
+api_key = os.getenv('GETPROFILE_API_KEY')
+```
+
+In Node.js:
+
+```js
+const apiKey = process.env.GETPROFILE_API_KEY;
+```
+
+---
+
+## Rotating or Revoking API Keys
+
+- Go to your **API Keys** page in the dashboard.
+- Use the **rotate** button to generate a new API key — the old one will stop working immediately.
+- If you suspect your key has been exposed, **revoke** it right away.
+
+---
+
+## Where is the API Key used?
+
+Your API key must be included in the `Authorization` header for every API request:
+
+```http
+Authorization: Bearer YOUR_API_KEY
+```
+
+Example `curl` request:
+
+```bash
+curl -X GET "https://getprofile.milukov.dev/api/v1/profile/abc123" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+---
+
+## Lost your API key?
+
+No worries! Just **rotate** it in the dashboard to generate a fresh one. Your existing integrations will need to be updated with the new key.
+
+---
+
+For any questions or concerns, contact our support team at [support@getprofile.miliukov.dev](mailto:support@getprofile.miliukov.dev).
+
+Stay secure and keep building amazing experiences!

@@ -1,0 +1,44 @@
+---
+title: "Submit Data"
+description: "Submit raw data to the GetProfile API"
+icon: "folder-input"
+---
+
+To create or update a user profile, send data to our API endpoint:
+
+```http
+POST /api/v1/profile/{profile_id}
+```
+
+## What to Send
+
+- **profile_id**: A unique identifier for the profile (e.g., a user or character ID in your app).
+- **data**: The raw text or structured data you want us to analyze.
+- **input_type** _(optional)_: A short label describing the type of data (e.g., `"bio"`, `"conversation"`, `"activity_log"`, `"form"`). This can help with tracking and better profiling.
+
+Example:
+
+```bash
+curl -X POST "https://getprofile.miliukov.dev/api/v1/profile/abc123" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "data": "Alex is a curious photographer from Berlin who loves indie music and hiking.",
+    "input_type": "bio"
+  }'
+```
+
+---
+
+## Processing Model
+
+- Your request is **accepted immediately** with a `202 Accepted` response.
+- We process the data **asynchronously** in the background.
+- When the processing is complete, the profile will be updated with the new insights.
+
+This makes it easy to send data **continuously** — your profiles will evolve as new data comes in!
+
+---
+
+✅ **No raw data is stored long-term** — only the structured profile is kept.
+🔒 **Input data is deleted** once the profile update is complete.

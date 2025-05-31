@@ -1,19 +1,3 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M9.06145 23.1079C5.26816 22.3769 -3.39077 20.6274 1.4173 5.06384C9.6344 6.09939 16.9728 14.0644 9.06145 23.1079Z" fill="url(#paint0_linear_17557_2021)"/>
-<path d="M8.91928 23.0939C5.27642 21.2223 0.78371 4.20891 17.0071 0C20.7569 7.19341 19.6212 16.5452 8.91928 23.0939Z" fill="url(#paint1_linear_17557_2021)"/>
-<path d="M8.91388 23.0788C8.73534 19.8817 10.1585 9.08525 23.5699 13.1107C23.1812 20.1229 18.984 26.4182 8.91388 23.0788Z" fill="url(#paint2_linear_17557_2021)"/>
-<defs>
-<linearGradient id="paint0_linear_17557_2021" x1="3.77557" y1="5.91571" x2="5.23185" y2="21.5589" gradientUnits="userSpaceOnUse">
-<stop stop-color="#18E299"/>
-<stop offset="1" stop-color="#15803D"/>
-</linearGradient>
-<linearGradient id="paint1_linear_17557_2021" x1="12.1711" y1="-0.718425" x2="10.1897" y2="22.9832" gradientUnits="userSpaceOnUse">
-<stop stop-color="#16A34A"/>
-<stop offset="1" stop-color="#4ADE80"/>
-</linearGradient>
-<linearGradient id="paint2_linear_17557_2021" x1="23.1327" y1="15.353" x2="9.33841" y2="18.5196" gradientUnits="userSpaceOnUse">
-<stop stop-color="#4ADE80"/>
-<stop offset="1" stop-color="#0D9373"/>
-</linearGradient>
-</defs>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128"><image width="128" height="128" xlink:href="data:image/png;base64,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"></image><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>

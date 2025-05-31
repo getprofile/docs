@@ -1,32 +1,9 @@
-# Mintlify Starter Kit
+# GetProfile Documentation
 
-Click on `Use this template` to copy the Mintlify starter kit. The starter kit contains examples including
+Welcome to the GetProfile documentation! Learn how to set up and use our API to extract profile information from your raw data using the power of AI.
 
-- Guide pages
-- Navigation
-- Customizations
-- API Reference pages
-- Use of popular components
+## What is GetProfile?
 
-### Development
+GetProfile is an AI-powered API that extracts structured profile information from raw data. It uses advanced natural language processing to analyze unstructured data and maintain a comprehensive profile, including interests, preferences, events, mood and more.
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the documentation changes locally. To install, use the following command
-
-```
-npm i -g mintlify
-```
-
-Run the following command at the root of your documentation (where docs.json is)
-
-```
-mintlify dev
-```
-
-### Publishing Changes
-
-Install our Github App to auto propagate changes from your repo to your deployment. Changes will be deployed to production automatically after pushing to the default branch. Find the link to install on your dashboard. 
-
-#### Troubleshooting
-
-- Mintlify dev isn't running - Run `mintlify install` it'll re-install dependencies.
-- Page loads as a 404 - Make sure you are running in a folder with `docs.json`
+[Go to Documentation](https://getprofile-docs.miliukov.dev)

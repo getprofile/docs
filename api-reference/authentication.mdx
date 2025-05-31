@@ -1,0 +1,45 @@
+---
+title: "Authentication"
+description: "All API requests to GetProfile require authentication using your **app's API key**."
+---
+
+## How it works
+
+Each app in your account has a unique API key. This key identifies your app and ensures that only you can access and modify your data.
+
+- **Keep your API key secure**
+- **Rotate keys in your dashboard if needed**
+- **Use different keys for different apps or environments**
+
+---
+
+## Adding the API key to requests
+
+You must include your API key in the `Authorization` header of every request:
+
+```http
+Authorization: Bearer YOUR_API_KEY
+```
+
+For example:
+
+```bash
+curl -X GET "https://yourapp.com/api/v1/profile/abc123" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Where to find your API key
+
+1. Log in to your Dashboard.
+2. Go to the API Keys page.
+3. Copy the API key for the app you want to integrate.
+
+If your API key is compromised, rotate it from the dashboard to protect your data.
+
+## Tips for API key usage
+
+- Never commit your API key to public repositories.
+- Use environment variables (process.env.YOUR_API_KEY) in your backend for secure usage.
+- Periodically review and rotate keys to maintain security.
+
+For more details on secret keys see the [API Keys](/builders/api-keys) documentation.

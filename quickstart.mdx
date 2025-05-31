@@ -1,97 +1,51 @@
 ---
-title: 'Quickstart'
-description: 'Start building awesome documentation in under 5 minutes'
+title: "Quickstart"
+description: "Get up and running with GetProfile in just a few minutes!"
+icon: "rocket"
 ---
 
-## Setup your development
+## 1. Sign up & create your app
 
-Learn how to update your docs locally and deploy them to the public.
+- Create your free account on our [website](https://getprofile.miliukov.dev/register).
+- From your [dashboard](https://getprofile.miliukov.dev/dashboard), create an **app** (e.g., "My AI App").
+- Each app has a unique **API key** — keep it secure!
 
-### Edit and preview
+## 2. Send your first profiling request
 
-<AccordionGroup>
-  <Accordion icon="github" title="Clone your docs locally">
-    During the onboarding process, we created a repository on your Github with
-    your docs content. You can find this repository on our
-    [dashboard](https://dashboard.mintlify.com). To clone the repository
-    locally, follow these
-    [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-    in your terminal.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Preview changes">
-    Previewing helps you make sure your changes look as intended. We built a
-    command line interface to render these changes locally. 
-    1. Install the
-    [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the
-    documentation changes locally with this command: ``` npm i -g mintlify ```
-    2. Run the following command at the root of your documentation (where
-    `docs.json` is): ``` mintlify dev ```
-    <Note>
-      If you’re currently using the legacy ```mint.json``` configuration file, please update the Mintlify CLI:
+Use our `POST /api/v1/profile/{id}` endpoint to send structured or unstructured data for analysis.
 
+Example using `curl`:
 
-      ```npm i -g mintlify@latest```
-      And run the new upgrade command in your docs repository:
+```bash
+curl -X POST "https://getprofile.miliukov.dev/api/v1/profile/abc123" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "data": "I love hiking and indie music.",
+    "input_type": "conversation"
+  }'
+```
 
-      ```mintlify upgrade```
-      You should now be using the new ```docs.json``` configuration file. Feel free to delete the ```mint.json``` file from your repository.
-    </Note>
-  </Accordion>
-</AccordionGroup>
+✅ You’ll get an immediate `202 Accepted` response while your data is processed in the background.
 
-### Deploy your changes
+## 3. Retrieve the processed profile
 
-<AccordionGroup>
+Use our `GET /api/v1/profile/{id}` endpoint to get the structured profile data and a generated summary.
 
-<Accordion icon="message-bot" title="Install our Github app">
-  Our Github app automatically deploys your changes to your docs site, so you
-  don't need to manage deployments yourself. You can find the link to install on
-  your [dashboard](https://dashboard.mintlify.com). Once the bot has been
-  successfully installed, there should be a check mark next to the commit hash
-  of the repo.
-</Accordion>
-<Accordion icon="rocket" title="Push your changes">
-  [Commit and push your changes to
-  Git](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push)
-  for your changes to update in your docs site. If you push and don't see that
-  the Github app successfully deployed your changes, you can also manually
-  update your docs through our [dashboard](https://dashboard.mintlify.com).
-</Accordion>
+```bash
+curl -X GET "https://getprofile.miliukov.dev/api/v1/profile/abc123" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
 
-</AccordionGroup>
+You’ll receive:
 
-## Update your docs
+- `profile`: Full structured profile data
+- `summary`: AI-generated summary for LLM usage
 
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
+## 4. Update profile over time
 
-<CardGroup>
+You can send new data to the same profile ID multiple times — GetProfile will merge and evolve the profile automatically!
 
-<Card title="Add Content With MDX" icon="file" href="/essentials/markdown">
-  Add content to your docs with MDX syntax.
-</Card>
+✅ Profiles grow and adapt as you learn more about your users or characters.
 
-<Card
-  title="Add Code Blocks"
-  icon="square-code"
-  href="/essentials/code"
->
-  Add code directly to your docs with syntax highlighting.
-</Card>
-
-<Card
-  title="Add Images"
-  icon="image"
-  href="/essentials/images"
->
-  Add images to your docs to make them more engaging.
-</Card>
-
-<Card
-  title="Add Custom Components"
-  icon="puzzle-piece"
-  href="/essentials/reusable-snippets"
->
-  Add templates to your docs to make them more reusable.
-</Card>
-
-</CardGroup>
+For complete details on all endpoints and optional fields, see the [API Reference](/api-reference).

@@ -1,0 +1,87 @@
+---
+title: "Get Profile"
+description: "Get structured profiles from the GetProfile API"
+icon: "folder-output"
+---
+
+After submitting data, you can **retrieve the structured profile** for a given user, character, or entity:
+
+```http
+GET /api/v1/profile/{profile_id}
+```
+
+Example:
+
+```bash
+curl -X GET "https://getprofile.miliukov.dev/api/v1/profile/abc123" \
+	-H "Authorization: Bearer YOUR_API_KEY" \
+	-H "Content-Type: application/json"
+```
+
+---
+
+## What’s in a Profile?
+
+A profile contains structured information extracted from your data:
+
+- **core_info**: Basic info like name, age, gender, and location.
+- **interests**: Categorized interests (music, hobbies, food, books, travel, etc.).
+- **personality**: Traits and mood trends.
+- **memories**: Key events or milestones.
+- **preferences**: Conversation style and topics to avoid.
+- **update_log**: Historical log of profile updates.
+- **timestamps**: Last updated, created at, and per-section timestamps.
+- **status**: `"processing"` or `"ready"` to indicate profile readiness.
+
+Here’s a partial example:
+
+```json
+{
+  "profile_id": "abc123",
+  "status": "ready",
+  "core_info": {
+    "name": { "value": "Alex", "confidence": 0.95 },
+    "location": { "value": "Berlin", "confidence": 0.9 }
+  },
+  "interests": {
+    "hobbies": [
+      { "value": "photography", "confidence": 0.9 },
+      { "value": "hiking", "confidence": 0.85 }
+    ],
+    "music": [{ "value": "indie rock", "confidence": 0.9 }]
+  },
+  "personality": {
+    "traits": [
+      { "value": "curious", "confidence": 0.9 },
+      { "value": "introverted", "confidence": 0.8 }
+    ],
+    "mood_trends": {
+      "default": { "value": "calm", "confidence": 0.9 },
+      "recent": { "value": "excited", "confidence": 0.8 }
+    }
+  },
+  "memories": [
+    {
+      "event": "adopted a cat named Luna",
+      "date": "2024-01-20",
+      "importance": "high",
+      "confidence": 0.95
+    }
+  ],
+  "last_updated": "2024-05-24T12:00:00Z",
+  "created_at": "2024-04-01T10:00:00Z"
+}
+```
+
+---
+
+## Searching & Summaries
+
+- In the **dashboard**, you can search profiles by id.
+- You’ll also receive a **generated summary** in the API response — ideal for LLMs or quick user overviews.
+
+✅ **Profiles update automatically** as you send new data, adapting to evolving user or character contexts!
+
+---
+
+Want to see more fields? Check out the **Profile type** in the [API Reference](../api-reference).
