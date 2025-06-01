@@ -12,7 +12,7 @@ icon: "rocket"
 
 ## 2. Send your first profiling request
 
-Use our `POST /api/v1/profile/{id}` endpoint to send structured or unstructured data for analysis.
+Use our `POST /v1/profile/{id}` endpoint to send structured or unstructured data for analysis.
 
 Example using `curl`:
 
@@ -30,7 +30,7 @@ curl -X POST "https://api.getprofile-ai.com/v1/profile/abc123" \
 
 ## 3. Retrieve the processed profile
 
-Use our `GET /api/v1/profile/{id}` endpoint to get the structured profile data and a generated summary.
+Use our `GET /v1/profile/{id}` endpoint to get the structured profile data and a generated summary.
 
 ```bash
 curl -X GET "https://api.getprofile-ai.com/v1/profile/abc123" \
