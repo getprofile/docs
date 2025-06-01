@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "GetProfile Documentation",
+  "name": "Documentation",
   "colors": {
     "primary": "#007FFF",
     "light": "#007FFF",
