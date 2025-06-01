@@ -99,11 +99,11 @@
         "items": [
           {
             "label": "Privacy Policy",
-            "href": "https://getprofile-ai.com/privacy-policy"
+            "href": "https://getprofile-ai.com/privacy"
           },
           {
             "label": "Terms of Service",
-            "href": "https://getprofile-ai.com/terms-of-service"
+            "href": "https://getprofile-ai.com/terms"
           }
         ]
       }
