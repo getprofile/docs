@@ -59,7 +59,7 @@
       "anchors": [
         {
           "anchor": "Website",
-          "href": "https://getprofile.miliukov.dev",
+          "href": "https://getprofile-ai.com",
           "icon": "globe"
         }
       ]
@@ -78,19 +78,19 @@
       },
       {
         "label": "Support",
-        "href": "mailto:support@getprofile.miliukov.dev",
+        "href": "mailto:support@getprofile-ai.com",
         "icon": "mail"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "http://getprofile.miliukov.dev/dashboard"
+      "href": "http://getprofile-ai.com/dashboard"
     }
   },
   "footer": {
     "socials": {
-      "website": "https://getprofile.miliukov.dev",
+      "website": "https://getprofile-ai.com",
       "github": "https://github.com/getprofile"
     },
     "links": [
@@ -99,11 +99,11 @@
         "items": [
           {
             "label": "Privacy Policy",
-            "href": "https://getprofile.miliukov.dev/privacy-policy"
+            "href": "https://getprofile-ai.com/privacy-policy"
           },
           {
             "label": "Terms of Service",
-            "href": "https://getprofile.miliukov.dev/terms-of-service"
+            "href": "https://getprofile-ai.com/terms-of-service"
           }
         ]
       }

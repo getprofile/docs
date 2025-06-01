@@ -6,8 +6,8 @@ icon: "rocket"
 
 ## 1. Sign up & create your app
 
-- Create your free account on our [website](https://getprofile.miliukov.dev/register).
-- From your [dashboard](https://getprofile.miliukov.dev/dashboard), create an **app** (e.g., "My AI App").
+- Create your free account on our [website](https://getprofile-ai.com/register).
+- From your [dashboard](https://getprofile-ai.com/dashboard), create an **app** (e.g., "My AI App").
 - Each app has a unique **API key** — keep it secure!
 
 ## 2. Send your first profiling request
@@ -17,7 +17,7 @@ Use our `POST /api/v1/profile/{id}` endpoint to send structured or unstructured 
 Example using `curl`:
 
 ```bash
-curl -X POST "https://getprofile.miliukov.dev/api/v1/profile/abc123" \
+curl -X POST "https://api.getprofile-ai.com/v1/profile/abc123" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -33,7 +33,7 @@ curl -X POST "https://getprofile.miliukov.dev/api/v1/profile/abc123" \
 Use our `GET /api/v1/profile/{id}` endpoint to get the structured profile data and a generated summary.
 
 ```bash
-curl -X GET "https://getprofile.miliukov.dev/api/v1/profile/abc123" \
+curl -X GET "https://api.getprofile-ai.com/v1/profile/abc123" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 

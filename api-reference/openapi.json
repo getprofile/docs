@@ -3,12 +3,12 @@
   "info": {
     "title": "GetProfile API",
     "description": "GetProfile API is a profiling service powered by AI. It allows users to submit their data and receive a profile based on that data. The API provides endpoints for creating, retrieving, and deleting profiles.",
-    "termsOfService": "https://getprofile.miliukov.dev/terms",
+    "termsOfService": "https://getprofile-ai.com/terms",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "https://getprofile.miliukov.dev/api/v1"
+      "url": "https://api.getprofile-ai.com/v1"
     }
   ],
   "security": [
