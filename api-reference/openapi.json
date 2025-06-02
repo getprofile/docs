@@ -8,7 +8,7 @@
   },
   "servers": [
     {
-      "url": "https://api.getprofile-ai.com/v1"
+      "url": "https://api.getprofile-ai.com"
     }
   ],
   "security": [
@@ -17,7 +17,7 @@
     }
   ],
   "paths": {
-    "/profile/{id}": {
+    "/v1/profile/{id}": {
       "get": {
         "description": "Returns a raw profile data",
         "parameters": [
@@ -37,7 +37,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Profile"
+                  "$ref": "#/components/schemas/GetProfileResponse"
                 }
               }
             }
@@ -135,39 +135,162 @@
   },
   "components": {
     "schemas": {
-      "Profile": {
-        "required": ["id"],
+      "GetProfileResponse": {
         "type": "object",
+        "required": ["profile_id", "profile"],
         "properties": {
-          "id": {
-            "description": "The unique identifier of the profile",
-            "type": "string"
+          "profile_id": {
+            "type": "string",
+            "description": "The unique identifier of the profile"
           },
-          "core_info": {
-            "description": "Core information about the profile",
-            "type": "object",
-            "properties": {
-              "name": {
-                "description": "Name of the profile",
-                "type": "string"
-              },
-              "age": {
-                "description": "Age of the profile owner",
-                "type": "integer",
-                "format": "int32"
-              },
-              "location": {
-                "description": "Location of the profile owner",
-                "type": "string"
-              },
-              "gender": {
-                "description": "Gender of the profile owner",
-                "type": "string"
-              }
-            }
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
           }
         }
       },
+      "Profile": {
+        "type": "object",
+        "required": [
+          "profile_id",
+          "tenant_id",
+          "status",
+          "created_at",
+          "last_updated"
+        ],
+        "properties": {
+          "profile_id": {
+            "type": "string",
+            "description": "The unique identifier of the profile"
+          },
+          "tenant_id": {
+            "type": "string",
+            "description": "Unique identifier for the tenant that owns this profile"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["processing", "ready"],
+            "description": "The current status of the profile"
+          },
+          "core_info": {
+            "type": "object",
+            "description": "Core information about the profile",
+            "properties": {
+              "name": { "$ref": "#/components/schemas/ScoredValueString" },
+              "age": { "$ref": "#/components/schemas/ScoredValueInteger" },
+              "gender": { "$ref": "#/components/schemas/ScoredValueString" },
+              "location": { "$ref": "#/components/schemas/ScoredValueString" }
+            }
+          },
+          "interests": {
+            "type": "object",
+            "description": "Interests and hobbies of the profile",
+            "additionalProperties": {
+              "type": "array",
+              "items": { "$ref": "#/components/schemas/ScoredValueString" }
+            }
+          },
+          "personality": {
+            "type": "object",
+            "description": "Personality traits and mood trends",
+            "properties": {
+              "traits": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/ScoredValueString" }
+              },
+              "mood_trends": {
+                "type": "object",
+                "properties": {
+                  "default": {
+                    "$ref": "#/components/schemas/ScoredValueString"
+                  },
+                  "recent": { "$ref": "#/components/schemas/ScoredValueString" }
+                }
+              }
+            }
+          },
+          "memories": {
+            "type": "array",
+            "description": "Important events and memories",
+            "items": {
+              "type": "object",
+              "required": ["event"],
+              "properties": {
+                "event": { "type": "string" },
+                "date": { "type": "string", "format": "date" },
+                "importance": {
+                  "type": "string",
+                  "enum": ["low", "medium", "high"]
+                },
+                "confidence": { "type": "number", "format": "float" }
+              }
+            }
+          },
+          "preferences": {
+            "type": "object",
+            "description": "Profile-specific preferences",
+            "properties": {
+              "conversation_style": {
+                "$ref": "#/components/schemas/ScoredValueString"
+              },
+              "topics_to_avoid": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/ScoredValueString" }
+              }
+            }
+          },
+          "field_timestamps": {
+            "type": "object",
+            "description": "Timestamps for profile field updates",
+            "additionalProperties": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "update_log": {
+            "type": "array",
+            "description": "Log of updates made to the profile",
+            "items": {
+              "type": "object",
+              "properties": {
+                "extracted_on": { "type": "string", "format": "date-time" },
+                "changes": {
+                  "type": "object",
+                  "description": "Partial updates to the profile"
+                }
+              }
+            }
+          },
+          "last_updated": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The last time the profile was updated"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date the profile was created"
+          },
+          "summary": {
+            "type": "string",
+            "description": "A natural language summary of the profile"
+          }
+        }
+      },
+      "ScoredValueString": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "string" },
+          "confidence": { "type": "number", "format": "float" }
+        }
+      },
+      "ScoredValueInteger": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "integer" },
+          "confidence": { "type": "number", "format": "float" }
+        }
+      },
+
       "ProfileUpdateRequest": {
         "required": ["data"],
         "type": "object",
