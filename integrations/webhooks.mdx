@@ -1,0 +1,96 @@
+---
+title: "Webhooks"
+description: "Webhooks let you receive real-time notifications whenever important events happen in your GetProfile account or your tenant's profiles. Instead of polling the API, your app can respond immediately to changes."
+---
+
+With webhooks, you can:
+
+- Keep your app’s database in sync with GetProfile
+- Trigger custom workflows in real-time
+- Monitor profile updates or billing events instantly
+
+## How It Works
+
+When an event occurs (like a profile update), GetProfile makes an HTTP POST request to the webhook URL you configured for your tenant. This request includes a JSON payload describing the event.
+
+Your server should respond with a 200 OK status to acknowledge receipt.
+
+## Example Webhook Event
+
+Here’s an example of a profile.updated event:
+
+```json
+{
+  "id": "evt_1234567890",
+  "event": "profile.updated",
+  "tenant_id": "abc-tenant",
+  "data": {
+    "profile_id": "12345",
+    "status": "ready"
+  },
+  "created_at": "2023-10-01T12:00:00Z",
+  "webhook_id": "webhook_12345"
+}
+```
+
+## Available Events
+
+| Event             | Description                        |
+| ----------------- | ---------------------------------- |
+| `profile.updated` | Sent when a profile’s data changes |
+
+## Configuring Webhooks
+
+1. In your [GetProfile dashboard](https://getprofile-ai.com), navigate to `Webhooks`.
+2. Click "Create webhook" button, enter the URL of your webhook endpoint (e.g., https://yourapp.com/webhooks/getprofile).
+3. Save the configuration.
+
+You can update, turn off or delete the webhook at any time.
+
+## Handling Webhook Requests
+
+Your webhook endpoint should:
+
+- Accept `POST` requests with `Content-Type: application/json`.
+- Parse the JSON payload.
+- Validate the request using the `Authorization` header.
+- Respond with 200 OK quickly.
+- Process the event asynchronously if needed.
+
+### Example in Node.js Express
+
+```javascript
+app.post("/webhooks/getprofile", express.json(), (req, res) => {
+  const authHeader = req.headers["authorization"];
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res
+      .status(401)
+      .send("Unauthorized: Missing or invalid Authorization header");
+  }
+
+  const incomingSecret = authHeader.split(" ")[1];
+
+  if (incomingSecret !== process.env.GETPROFILE_API_KEY) {
+    return res.status(401).send("Unauthorized: Invalid webhook secret");
+  }
+
+  const event = req.body;
+  console.log("Received webhook event:", event);
+
+  // TODO: process event here
+
+  res.status(200).send("OK");
+});
+```
+
+## Security Best Practices
+
+- Only accept requests from trusted sources.
+- Validate the `Authorization` header before processing the event.
+- Use HTTPS for your endpoint.
+- Respond quickly (under 5 seconds) to avoid retries.
+
+## API Reference
+
+Webhooks API reference is coming soon.

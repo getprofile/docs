@@ -24,6 +24,8 @@ curl -X GET "https://api.getprofile-ai.com/v1/profile/abc123" \
 
 A profile contains structured information extracted from your data:
 
+- **profile_id**: Unique identifier for the profile.
+- **summary**: AI-generated summary of the profile, useful for quick overviews or providing context to LLMs.
 - **core_info**: Basic info like name, age, gender, and location.
 - **interests**: Categorized interests (music, hobbies, food, books, travel, etc.).
 - **personality**: Traits and mood trends.
@@ -39,6 +41,7 @@ Here’s a partial example:
 {
   "profile_id": "abc123",
   "status": "ready",
+  "summary": "Alex is a curious and introverted person from Berlin who enjoys photography and hiking. Recently adopted a cat named Luna.",
   "core_info": {
     "name": { "value": "Alex", "confidence": 0.95 },
     "location": { "value": "Berlin", "confidence": 0.9 }
@@ -84,4 +87,4 @@ Here’s a partial example:
 
 ---
 
-Want to see more fields? Check out the **Profile type** in the [API Reference](../api-reference).
+Want to see more fields? Check out the **Profile type** in the [API Reference](/api-reference/profile/get#response-profile).

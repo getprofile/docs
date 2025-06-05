@@ -1,0 +1,89 @@
+---
+title: "MCP Server"
+description: "We offer a Model Context Provider (MCP) for the GetProfile API, so you can integrate real-time profile data directly into your LLM-powered tools."
+---
+
+<Note>**Model Context Provider (MCP) is coming soon!**</Note>
+
+We are excited to announce that GetProfile will soon support a Model Context Provider (MCP) for our API. This will allow you to integrate real-time profile data directly into your LLM-powered tools, such as ChatGPT, Claude, or custom AI agents.
+
+---
+
+### What is MCP?
+
+The MCP is a **machine-readable API definition** that enables:
+
+- **AI models** to understand your API’s structure
+- **LLM tools** to **call the API** directly (like they would call a plugin)
+- Real-time **access to profile data** for use in conversations, chatbots, or any LLM application
+
+### Getting Started
+
+- **Get your API key**: \[Dashboard → Tenant Settings → API Key]
+- **Use the MCP URL**: `https://api.getprofile-ai.com/mcp`
+- **Questions?** Contact [support@getprofile-ai.com](mailto:support@getprofile-ai.com)
+
+---
+
+### How to Use It
+
+#### Get API Key
+
+Head to your [**GetProfile dashboard**](https://getprofile-ai.com/dashboard/api-keys) and generate or rotate **API key** for your app.
+
+#### Connect your LLM tool
+
+Use the following URL to connect your LLM tool to the MCP:
+
+```
+https://api.getprofile-ai.com/mcp
+```
+
+- This URL exposes an **OpenAPI schema** for your tenant’s profile endpoints.
+- Tools like ChatGPT, LangChain, or custom LLM frameworks can **automatically read** this schema and generate secure API calls.
+
+#### Use the API in your LLM workflow
+
+When your LLM tool asks for real-time profile data (like hobbies, traits, mood, etc.), it sends API requests using your **API key** for authorization.
+
+Example usage with an LLM framework (pseudocode):
+
+```ts
+const response = await llm.callMCP({
+  endpoint: "https://api.getprofile-ai.com/mcp",
+  headers: {
+    "X-API-KEY": process.env.GETPROFILE_API_KEY,
+  },
+  query: "Fetch the latest profile for user 123",
+});
+
+console.log(response.data);
+```
+
+---
+
+### Key Benefits
+
+- **Real-time profile data** — always up to date
+- **No custom integration code** — just plug in the MCP URL
+- **Secure** — your API key controls access, just like normal API calls
+- **Flexible** — use it in Claude Desktop, LangChain, custom AI frameworks, or even GPT-4’s plugin interface
+
+---
+
+### Security & Best Practices
+
+- Use your **API key** for all MCP calls.
+- Rotate your API keys regularly for better security.
+- Monitor usage in your dashboard to prevent abuse.
+- Only share your MCP URL and API key with trusted applications.
+
+### Self-hosted MCP server
+
+If you prefer to self-host the MCP server, you can install it with a single command:
+
+```bash
+npx mint-mcp add docs.getprofile-ai.com
+```
+
+This command will set up a local or cloud-based MCP server that mirrors the GetProfile API structure, allowing you to integrate it with your LLM tools without relying on our hosted MCP server.

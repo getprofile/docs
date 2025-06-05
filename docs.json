@@ -18,18 +18,27 @@
         "groups": [
           {
             "group": "Get Started",
-            "pages": ["index", "quickstart", "dashboard", "integrations"]
+            "pages": ["index", "quickstart", "dashboard", "api-keys"]
           },
+
           {
-            "group": "For builders",
+            "group": "Integrations",
+            "icon": "network",
             "pages": [
-              "builders/submit-data",
-              "builders/get-profile",
-              "builders/api-keys"
+              "integrations/overview",
+              "integrations/webhooks",
+              "integrations/zapier",
+              "integrations/mcp"
             ]
           },
           {
+            "group": "Developers",
+            "icon": "terminal",
+            "pages": ["builders/submit-data", "builders/get-profile"]
+          },
+          {
             "group": "SDKs",
+            "icon": "code",
             "pages": ["sdks/nodejs"]
           }
         ]
