@@ -299,9 +299,8 @@
         "type": "object",
         "properties": {
           "data": {
-            "description": "Data to extract a profile from",
-            "type": "object",
-            "additionalProperties": true
+            "description": "Data to extract a profile from. Can be plain text, JSON, markdown or any other format.",
+            "type": "string"
           },
           "input_type": {
             "description": "Type of the input data, e.g. `chat history`, `character description`, `activity log`, etc.",
