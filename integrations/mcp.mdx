@@ -1,89 +1,131 @@
 ---
 title: "MCP Server"
-description: "We offer a Model Context Provider (MCP) for the GetProfile API, so you can integrate real-time profile data directly into your LLM-powered tools."
+description: "We offer a Model Context Protocol (MCP) server for the GetProfile API, so you can integrate real-time profile data directly into your LLM-powered tools."
 ---
 
-<Note>**Model Context Provider (MCP) is coming soon!**</Note>
+<Note>**Model Context Protocol (MCP) is coming soon!**</Note>
 
-We are excited to announce that GetProfile will soon support a Model Context Provider (MCP) for our API. This will allow you to integrate real-time profile data directly into your LLM-powered tools, such as ChatGPT, Claude, or custom AI agents.
+We are excited to announce that GetProfile will soon support a Model Context Protocol (MCP) for our API. This will allow you to integrate real-time profile data directly into your LLM-powered tools, such as ChatGPT, Claude, or custom AI agents.
 
 ---
 
 ### What is MCP?
 
-The MCP is a **machine-readable API definition** that enables:
+**Model Context Protocol (MCP)** is a secure, structured interface that allows AI assistants and LLM tools (like Claude, GPT-4, or LangChain agents) to **access external data sources** — in this case, the GetProfile API.
 
-- **AI models** to understand your API’s structure
-- **LLM tools** to **call the API** directly (like they would call a plugin)
-- Real-time **access to profile data** for use in conversations, chatbots, or any LLM application
-
-### Getting Started
-
-- **Get your API key**: \[Dashboard → Tenant Settings → API Key]
-- **Use the MCP URL**: `https://api.getprofile-ai.com/mcp`
-- **Questions?** Contact [support@getprofile-ai.com](mailto:support@getprofile-ai.com)
+This lets your AI workflows pull **live profile data** (like interests, traits, and updates) directly from your tenant’s profiles in real time.
 
 ---
 
-### How to Use It
+### Setting Up MCP with Claude Desktop (or other tools)
 
-#### Get API Key
-
-Head to your [**GetProfile dashboard**](https://getprofile-ai.com/dashboard/api-keys) and generate or rotate **API key** for your app.
-
-#### Connect your LLM tool
-
-Use the following URL to connect your LLM tool to the MCP:
-
-```
-https://api.getprofile-ai.com/mcp
-```
-
-- This URL exposes an **OpenAPI schema** for your tenant’s profile endpoints.
-- Tools like ChatGPT, LangChain, or custom LLM frameworks can **automatically read** this schema and generate secure API calls.
-
-#### Use the API in your LLM workflow
-
-When your LLM tool asks for real-time profile data (like hobbies, traits, mood, etc.), it sends API requests using your **API key** for authorization.
-
-Example usage with an LLM framework (pseudocode):
-
-```ts
-const response = await llm.callMCP({
-  endpoint: "https://api.getprofile-ai.com/mcp",
-  headers: {
-    "X-API-KEY": process.env.GETPROFILE_API_KEY,
-  },
-  query: "Fetch the latest profile for user 123",
-});
-
-console.log(response.data);
-```
+Follow these steps to connect Claude Desktop (or any MCP-compatible app) to our MCP server:
 
 ---
 
-### Key Benefits
+#### Install Claude Desktop
 
-- **Real-time profile data** — always up to date
-- **No custom integration code** — just plug in the MCP URL
-- **Secure** — your API key controls access, just like normal API calls
-- **Flexible** — use it in Claude Desktop, LangChain, custom AI frameworks, or even GPT-4’s plugin interface
+Download and install Claude Desktop from [claude.ai/download](https://claude.ai/download).
 
 ---
 
-### Security & Best Practices
+#### Access Developer Settings
 
-- Use your **API key** for all MCP calls.
-- Rotate your API keys regularly for better security.
-- Monitor usage in your dashboard to prevent abuse.
-- Only share your MCP URL and API key with trusted applications.
+- Open Claude Desktop.
+- Click on the **Claude** menu in the top bar.
+- Select **Settings**.
+- Go to the **Developer** tab.
+- Click **Edit Config** to open the configuration file.
 
-### Self-hosted MCP server
+---
 
-If you prefer to self-host the MCP server, you can install it with a single command:
+#### Configure the MCP Server
 
-```bash
-npx mint-mcp add docs.getprofile-ai.com
+In the `claude_desktop_config.json` file, add our **GetProfile MCP server** configuration:
+
+```json
+{
+  "mcpServers": {
+    "getprofile": {
+      "command": "npx",
+      "args": ["-y", "mint-mcp add docs.getprofile-ai.com"],
+      "env": {
+        "API_KEY": "YOUR_API_KEY_HERE"
+      }
+    }
+  }
+}
 ```
 
-This command will set up a local or cloud-based MCP server that mirrors the GetProfile API structure, allowing you to integrate it with your LLM tools without relying on our hosted MCP server.
+Replace `YOUR_API_KEY_HERE` with your tenant’s **API key** from the GetProfile dashboard.
+
+✅ **Tip:** You can add multiple MCP servers if needed (like local filesystem, etc.).
+
+---
+
+#### 4️⃣ Restart Claude Desktop
+
+Save your changes and restart Claude Desktop to activate the new MCP server configuration.
+
+---
+
+### Using MCP Tools with Claude
+
+Once configured:
+
+✅ Open a new conversation in Claude Desktop.
+✅ Click the **Tools** icon in the chat window.
+✅ You’ll see the **GetProfile MCP tool** available.
+✅ You can now ask Claude to **fetch live profile data** using your tenant’s API key.
+
+For example:
+
+> “Show me Alex’s hobbies and mood.”
+
+Claude will:
+1️⃣ Identify the GetProfile MCP tool.
+2️⃣ Request permission to use it.
+3️⃣ Fetch the real-time profile data.
+4️⃣ Provide the result in your conversation.
+
+---
+
+### 🔒 Security Considerations
+
+- Claude (or any AI assistant) **asks for your permission** before running MCP tools.
+- You can grant access **once** or for the entire conversation.
+- Review each request to ensure you’re comfortable with the data shared.
+
+---
+
+### Troubleshooting
+
+✅ Verify your **API key** is correct.
+✅ Ensure you **restarted Claude Desktop** after configuration.
+✅ Check that **Node.js and npx** are installed (`npx` is bundled with Node).
+✅ If you see errors, review Claude’s logs for details.
+
+---
+
+### 🔗 Using with Other MCP-Compatible Tools
+
+The GetProfile MCP server works with **any tool** that supports the Model Context Protocol — not just Claude Desktop.
+
+Configuration steps may vary depending on the app, but the **core usage remains the same**:
+
+- Point to the MCP server package
+- Pass your **API key**
+- Use live profile data in your LLM workflows!
+
+---
+
+🔗 **Questions?** Contact [support@getprofile-ai.com](mailto:support@getprofile-ai.com). We’re here to help you build richer, more dynamic AI experiences!
+
+---
+
+Would you like:
+
+✅ A short **quickstart snippet** for another framework like LangChain?
+✅ Or to generate a **video script** or animated GIF for social or docs?
+
+Let me know — your MCP integration is ready to shine! 🚀✨
