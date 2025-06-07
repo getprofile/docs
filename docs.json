@@ -34,7 +34,11 @@
           {
             "group": "Developers",
             "icon": "terminal",
-            "pages": ["builders/submit-data", "builders/get-profile"]
+            "pages": [
+              "builders/submit-data",
+              "builders/get-profile",
+              "builders/search-profiles"
+            ]
           },
           {
             "group": "SDKs",
@@ -52,6 +56,11 @@
               "api-reference/introduction",
               "api-reference/authentication"
             ]
+          },
+          {
+            "group": "Search API",
+            "icon": "sparkles",
+            "pages": ["api-reference/search/get"]
           },
           {
             "group": "Profile API",

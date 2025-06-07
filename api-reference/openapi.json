@@ -134,6 +134,119 @@
           }
         }
       }
+    },
+    "/v1/search": {
+      "get": {
+        "summary": "Smart search for profiles",
+        "description": "Search for profiles using semantic vector search and classic filtering, sorting, and pagination.",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Natural language search query. If provided, enables vector-based semantic search.",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "sensitivity",
+            "in": "query",
+            "description": "Vector search similarity threshold (0-100). Higher = stricter match.",
+            "required": false,
+            "schema": { "type": "integer", "default": 63 }
+          },
+          {
+            "name": "filterBy",
+            "in": "query",
+            "description": "Field to filter by (e.g. `name`, `location`, `language`, `id`).",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "filterValue",
+            "in": "query",
+            "description": "Value to filter for (case-insensitive partial match).",
+            "required": false,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Field to sort by (e.g. `last_updated`, `created_at`, `name`). Ignored when using vector search.",
+            "required": false,
+            "schema": { "type": "string", "default": "last_updated" }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Sorting order: `asc` or `desc`.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["asc", "desc"],
+              "default": "desc"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number for pagination.",
+            "required": false,
+            "schema": { "type": "integer", "default": 1 }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Number of profiles per page.",
+            "required": false,
+            "schema": { "type": "integer", "default": 10 }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of matching profiles and pagination metadata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "profiles": {
+                      "type": "array",
+                      "items": { "$ref": "#/components/schemas/Profile" }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "description": "Total number of matching profiles (approximate for vector search)."
+                    },
+                    "page": { "type": "integer" },
+                    "pageSize": { "type": "integer" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
     }
   },
   "components": {

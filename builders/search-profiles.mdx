@@ -1,0 +1,126 @@
+---
+title: "Search Profiles"
+
+description: "Our ✨ Smart Search ✨ API lets you find and browse profiles using both semantic vector search and classic search features like filtering, sorting, and pagination—all in a single request."
+icon: "folder-search"
+---
+
+![GetProfile AI Smart Search](/images/smart-search.png)
+
+## Endpoint
+
+```http
+GET /v1/search
+```
+
+---
+
+## Description
+
+This endpoint **combines**:
+
+- **Vector search** for semantic, natural language queries.
+- **Classic search** for field-based filtering, sorting, and pagination.
+
+You can use them **together** or **separately**. If a `query` is provided, **vector search** is used to find the most similar profiles to your text. If no `query` is provided, results are listed based on your filters and sorting.
+
+---
+
+## Query Parameters
+
+| Parameter     | Type   | Default        | Description                                                                                       |
+| ------------- | ------ | -------------- | ------------------------------------------------------------------------------------------------- |
+| `query`       | string | —              | Natural language search text. If present, enables vector-based semantic search.                   |
+| `sensitivity` | number | 63             | (Vector search only) Similarity threshold (0-100). Lower = more results; higher = stricter match. |
+| `filterBy`    | string | —              | Field to filter by (`name`, `location`, `age`, `language`, `id`, etc.).                           |
+| `filterValue` | string | —              | Value to filter for. Case-insensitive partial matching.                                           |
+| `sortBy`      | string | `last_updated` | Field to sort by (`last_updated`, `created_at`, `id`, `name`, etc.).                              |
+| `sortOrder`   | string | `desc`         | Sorting order: `asc` or `desc`.                                                                   |
+| `page`        | number | 1              | Page number for pagination.                                                                       |
+| `pageSize`    | number | 10             | Number of profiles per page.                                                                      |
+
+---
+
+## Behavior
+
+### If `query` is provided:
+
+- Uses **vector search** (AI embeddings) to find similar profiles.
+- Results are always **ranked by similarity** (`similarityScore`).
+- Classic sorting (`sortBy`) is ignored for vector search (limitation of vector search engines).
+
+### If no `query` is provided:
+
+- Classic search: results are filtered, sorted, and paginated as usual.
+
+### If both `query` and filters are provided:
+
+- Vector search results are **filtered** by `filterBy` and `filterValue` **after** vector search.
+- Sorted by **similarity**.
+
+---
+
+## Example Request
+
+```http
+GET /v1/smart-search?query=experienced+data+scientist+with+PhD+looking+for+job&filterBy=location&filterValue=California&sortBy=last_updated&sortOrder=desc&page=1&pageSize=10
+```
+
+---
+
+## Example Response
+
+```json
+{
+  "profiles": [
+    {
+      "profile_id": "abc123",
+      "tenant_id": "tenant123",
+      "status": "active",
+      "core_info": {
+        "name": "Jane Doe",
+        "location": "Helsinki",
+        "age": 35,
+        "language": "Finnish"
+      },
+      "last_updated": "2024-06-01T10:00:00Z",
+      "created_at": "2023-05-10T15:30:00Z",
+      "similarityScore": 0.92
+    },
+    ...
+  ],
+  "total": 10,
+  "page": 1,
+  "pageSize": 10
+}
+```
+
+---
+
+## Notes
+
+- **Vector search** does **not support** custom `sortBy` fields—results are always sorted by `similarityScore` when `query` is used.
+- If you need to sort vector search results by another field, consider **post-processing** in your application after fetching results.
+- For **classic listing**, sorting works as expected for any `sortBy` field.
+
+---
+
+## Use Cases
+
+- Discover profiles matching **natural language queries** like:
+
+> “experienced data scientist with PhD looking for job”
+
+- Filter results by **specific fields** like location or language.
+
+- Paginate and load results seamlessly in your UI.
+
+- Soon: create profile segments based on search results for targeted actions and campaigns.
+
+---
+
+## Conclusion
+
+The **Smart Profiles Search API** is your single endpoint for **powerful, flexible profile discovery** — whether you’re listing profiles, doing semantic search, running marketing campaigns, or building internal tools.
+
+Need help integrating? Let us know! [support@getprofile-ai.com](mailto:support@getprofile-ai.com)
