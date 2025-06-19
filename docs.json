@@ -79,6 +79,11 @@
           "anchor": "Website",
           "href": "https://getprofile-ai.com",
           "icon": "globe"
+        },
+        {
+          "anchor": "Blog",
+          "href": "https://getprofile-ai.com/blog",
+          "icon": "rss"
         }
       ]
     }
@@ -111,6 +116,7 @@
       "website": "https://getprofile-ai.com",
       "linkedin": "https://www.linkedin.com/company/getprofile-ai",
       "x": "https://x.com/GetProfileAI",
+      "facebook": "https://www.facebook.com/getprofileai",
       "github": "https://github.com/getprofile"
     },
     "links": [
