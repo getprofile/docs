@@ -1,3 +1,5 @@
+The repository is deprecated. Use [https://github.com/getprofile/getprofile](https://github.com/getprofile/getprofile) instead.
+
 # GetProfile Documentation
 
 Welcome to the GetProfile documentation! Learn how to set up and use our API to extract profile information from your raw data using the power of AI.
